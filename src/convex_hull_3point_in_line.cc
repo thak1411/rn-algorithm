@@ -32,17 +32,17 @@ std::vector < pii > get_convex_hull(std::vector < pii > v) {
     ch.push_back(v[0]);
     if (v.size() > 1) ch.push_back(v[1]);
     for (int i = 2; i < v.size(); ++i) {
-        for (; ch.size() > 2 && ccw(ch[ch.size() - 2], ch[ch.size() - 1], v[i]) <= 0; ) ch.pop_back();
+        for (; ch.size() > 1 && ccw(ch[ch.size() - 2], ch[ch.size() - 1], v[i]) <= 0; ) ch.pop_back();
         ch.push_back(v[i]);
     }
-    for (; ch.size() > 2 && ccw(ch[ch.size() - 2], ch[ch.size() - 1], ch[0]) < 0; ) ch.pop_back();
+    for (; ch.size() > 1 && ccw(ch[ch.size() - 2], ch[ch.size() - 1], ch[0]) <= 0; ) ch.pop_back();
     return ch;
 }
 
 int main() {
     std::vector < pii > v;
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
             v.emplace_back(i, j);
         }
     }
