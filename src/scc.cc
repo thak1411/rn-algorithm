@@ -22,7 +22,7 @@ int dfs(int x) {
         for (; ;) {
             int t = st.back(); st.pop_back();
             tmp.push_back(t);
-            fin[t] = 1;
+            fin[t] = scc.size() + 1;
             if (t == x) break;
         }
         std::reverse(all(tmp));
