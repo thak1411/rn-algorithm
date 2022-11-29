@@ -28,11 +28,11 @@ int bfs(int n) {
     }
     return ok;
 }
-
+ 
 int dfs(int x) {
     if (vis[x]++) return 0;
     for (auto& it : ed[x]) {
-        if (r[it] == -1 || (!vis[x] && dist[r[it]] == dist[x] + 1 && dfs(r[it]))) {
+        if (r[it] == -1 || (dist[r[it]] == dist[x] + 1 && dfs(r[it]))) {
             l[x] = it;
             r[it] = x;
             return 1;
@@ -40,7 +40,7 @@ int dfs(int x) {
     }
     return 0;
 }
-
+ 
 int bipartite_matching(int n) {
     int res = 0;
     memset(l, -1, sizeof l);
