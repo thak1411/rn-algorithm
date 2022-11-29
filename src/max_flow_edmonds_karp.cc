@@ -7,12 +7,12 @@
 std::vector < int > ed[MAXN];
 int dp[MAXN], c[MAXN][MAXN], fl[MAXN][MAXN];
 
-int get_max_flow() {
+int get_max_flow(int src, int dest) {
     int res = 0;
     for (; ;) {
         memset(dp, -1, sizeof dp);
         std::queue < int > q;
-        q.push(S); dp[S] = 0;
+        q.push(src); dp[src] = 0;
         for (; !q.empty(); ) {
             int x = q.front(); q.pop();
             for (auto& it : ed[x]) {
@@ -20,13 +20,13 @@ int get_max_flow() {
                 q.push(it); dp[it] = x;
             }
         }
-        if (dp[E] == -1) break;
+        if (dp[dest] == -1) break;
         int flow = 2147483647;
-        for (int i = E; i != S; i = dp[i]) {
+        for (int i = dest; i != src; i = dp[i]) {
             flow = std::min(flow, c[dp[i]][i] - fl[dp[i]][i]);
         }
         if (flow == 0) break;
-        for (int i = E; i != S; i = dp[i]) {
+        for (int i = dest; i != src; i = dp[i]) {
             fl[dp[i]][i] += flow;
             fl[i][dp[i]] -= flow;
         }
@@ -43,6 +43,6 @@ int main() {
     ed[2].push_back(4); ed[4].push_back(2); c[2][4] = 100;
     ed[3].push_back(4); ed[4].push_back(3); c[3][4] = 10;
     ed[4].push_back(E); ed[E].push_back(4); c[4][E] = 1000;
-    printf("%d\n", get_max_flow());
+    printf("%d\n", get_max_flow(S, E));
     return 0;
 }
