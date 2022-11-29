@@ -46,14 +46,19 @@ int get_max_flow(int src, int dest) {
     return res;
 }
 
+void add(int p, int q, int cap) {
+    ed[p].push_back(q); c[p][q] += cap;
+    ed[q].push_back(p);
+}
+
 int main() {
-    ed[S].push_back(1); ed[1].push_back(S); c[S][1] = 2;
-    ed[S].push_back(2); ed[2].push_back(S); c[S][2] = 10;
-    ed[1].push_back(2); ed[2].push_back(1); c[1][2] = 1;
-    ed[2].push_back(3); ed[3].push_back(2); c[2][3] = 9;
-    ed[2].push_back(4); ed[4].push_back(2); c[2][4] = 100;
-    ed[3].push_back(4); ed[4].push_back(3); c[3][4] = 10;
-    ed[4].push_back(E); ed[E].push_back(4); c[4][E] = 1000;
+    add(S, 1, 2);
+    add(S, 2, 10);
+    add(1, 2, 1);
+    add(2, 3, 9);
+    add(2, 4, 100);
+    add(3, 4, 10);
+    add(4, E, 1000);
     printf("%d\n", get_max_flow(S, E));
     return 0;
 }
