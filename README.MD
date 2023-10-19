@@ -24,6 +24,7 @@ Rn's Algorithm & Data Structure Library
 1. Aho Corasick
 2. KMP
 3. Manacher
+4. Suffix Array & LCP Array
 
 ## 4. Geometry
 
